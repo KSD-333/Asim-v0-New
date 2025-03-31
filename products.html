@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - Asim Agro</title>
+  <meta name="description" content="Explore our range of agricultural products">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="images/jpeg" href="images/logo.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i>
+        <span>Asim Agro</span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/products.html" class="active">Products</a>
+        <a href="/about.html">About Us</a>
+        <a href="/research.html">Research</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i>
+        <span>Asim Agro</span>
+      </a>
+      <button class="close-menu" id="closeMenu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="about.html">About Us</a>
+      <a href="research.html">Research</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <h1>Our Products</h1>
+      </div>
+    </div>
+
+    <section class="products-section">
+      <div class="container">
+        <div class="category-filter">
+          <button class="filter-btn active" data-category="all">All Products</button>
+          <button class="filter-btn" data-category="fertilizers">Fertilizers</button>
+          <button class="filter-btn" data-category="seeds">Seeds</button>
+          <button class="filter-btn" data-category="pesticides">Pesticides</button>
+          <button class="filter-btn" data-category="tools">Tools & Equipment</button>
+        </div>
+        
+        <div class="product-grid" id="productsGrid">
+          <!-- Products will be loaded here via JavaScript -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <div class="footer-logo">
+            <i class="fas fa-leaf"></i>
+            <span>Asim Agro</span>
+          </div>
+          <p>Leading agricultural company providing innovative solutions for sustainable farming.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Products</h3>
+          <ul>
+            <li><a href="products.html">Seeds</a></li>
+            <li><a href="products.html">Fertilizers</a></li>
+            <li><a href="products.html">Pesticides</a></li>
+            <li><a href="products.html">Tools & Equipment</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h3>Contact Info</h3>
+          <address>
+            <p>123 Agriculture Road</p>
+            <p>Farmington, AG 12345</p>
+            <p>Phone: +1 (555) 123-4567</p>
+            <p>Email: info@asimagro.com</p>
+          </address>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; <span id="currentYear"></span> Asim Agro. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

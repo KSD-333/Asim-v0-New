@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asim Agro - Agricultural Excellence</title>
+  <meta name="description" content="Leading agricultural company providing innovative solutions">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="images/jpeg" href="images/logo.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i>
+        <span>Asim Agro</span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="/index.html" class="active">Home</a>
+        <a href="/products.html">Products</a>
+        <a href="/about.html">About Us</a>
+        <a href="/research.html">Research</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i>
+        <span>Asim Agro</span>
+      </a>
+      <button class="close-menu" id="closeMenu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About Us</a>
+      <a href="research.html">Research</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Innovative Agricultural Solutions for a Sustainable Future</h1>
+            <p>Asim Agro provides cutting-edge products and services to help farmers increase productivity while preserving the environment.</p>
+            <div class="hero-buttons">
+              <a href="products.html" class="btn btn-primary">Explore Products</a>
+              <a href="contact.html" class="btn btn-outline">Contact Us</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="images/logo.jpeg" alt="Asim Agro Hero">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-products">
+      <div class="container">
+        <div class="section-header">
+          <h2>Featured Products</h2>
+          <p>Discover our range of high-quality agricultural products designed to enhance your farming experience.</p>
+        </div>
+        
+        <div class="category-filter">
+          <button class="filter-btn active" data-category="all">All Products</button>
+          <button class="filter-btn" data-category="seeds">Seeds</button>
+          <button class="filter-btn" data-category="fertilizers">Fertilizers</button>
+          <button class="filter-btn" data-category="pesticides">Pesticides</button>
+        </div>
+        
+        <div class="product-grid" id="featuredProducts">
+          <!-- Products will be loaded here via JavaScript -->
+        </div>
+        
+        <div class="view-all">
+          <a href="products.html" class="btn btn-outline">View All Products</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Preview Section -->
+    <section class="about-preview">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-image">
+            <img src="images/owner.jpeg" alt="About Asim Agro" ">
+          </div>
+          <div class="about-text">
+            <h2>About Asim Agro</h2>
+            <p>Founded with a vision to revolutionize agriculture, Asim Agro has been at the forefront of developing sustainable farming solutions for over 15 years. Our commitment to quality, innovation, and environmental stewardship has made us a trusted partner for farmers across the region.</p>
+            <p>We believe that the future of agriculture lies in balancing productivity with sustainability, and our products and research are designed to help farmers achieve this balance.</p>
+            <div class="about-buttons">
+              <a href="about.html" class="btn btn-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Preview Section -->
+    <section class="research-preview">
+      <div class="container">
+        <div class="section-header">
+          <h2>Research & Innovation</h2>
+          <p>Discover how our research initiatives are shaping the future of agriculture.</p>
+        </div>
+        
+        <div class="research-grid">
+          <div class="card">
+            <div class="card-image">
+              <img src="https://placehold.co/600x400" alt="Sustainable Pest Management">
+            </div>
+            <div class="card-content">
+              <h3>Sustainable Pest Management</h3>
+              <p>Developing eco-friendly solutions for pest control that minimize environmental impact while maximizing crop protection.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-image">
+              <img src="https://placehold.co/600x400" alt="Drought-Resistant Crops">
+            </div>
+            <div class="card-content">
+              <h3>Drought-Resistant Crops</h3>
+              <p>Researching and developing crop varieties that can thrive in water-scarce conditions, ensuring food security in changing climates.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-image">
+              <img src="https://placehold.co/600x400" alt="Soil Health Optimization">
+            </div>
+            <div class="card-content">
+              <h3>Soil Health Optimization</h3>
+              <p>Investigating methods to enhance soil fertility naturally, promoting long-term sustainability of agricultural lands.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="view-all">
+          <a href="research.html" class="btn btn-outline">View All Research</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section class="contact-cta">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Ready to Transform Your Farming?</h2>
+          <p>Contact us today to learn how our products and expertise can help you achieve sustainable growth.</p>
+          <div class="cta-buttons">
+            <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+            <a href="products.html" class="btn btn-outline-light">Explore Products</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <div class="footer-logo">
+            <i class="fas fa-leaf"></i>
+            <span>Asim Agro</span>
+          </div>
+          <p>Leading agricultural company providing innovative solutions for sustainable farming.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Products</h3>
+          <ul>
+            <li><a href="products.html">Seeds</a></li>
+            <li><a href="products.html">Fertilizers</a></li>
+            <li><a href="products.html">Pesticides</a></li>
+            <li><a href="products.html">Tools & Equipment</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h3>Contact Info</h3>
+          <address>
+            <p>Asim Agro Research,Kadegoan </p>
+            <p>Maharashtra, India</p>
+            <p>Phone: +91 9421132407</p>
+            <p>Email:info@asimagroresearch.com</p>
+          </address>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; <span id="currentYear"></span> Asim Agro. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
