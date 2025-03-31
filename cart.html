@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="images/jpeg" href="images/logo.jpeg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Your popup-related CSS code goes here... */
+  </style>
 </head>
 <body>
   <header class="navbar">
@@ -18,15 +21,15 @@
       </a>
       
       <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="about.html">About Us</a>
-        <a href="research.html">Research</a>
-        <a href="contact.html">Contact</a>
+        <a href="/index.html" class="active">Home</a>
+        <a href="/products.html">Products</a>
+        <a href="/about.html">About Us</a>
+        <a href="/research.html">Research</a>
+        <a href="/contact.html">Contact</a>
       </nav>
       
       <div class="nav-actions">
-        <a href="cart.html" class="cart-icon active">
+        <a href="cart.html" class="cart-icon">
           <i class="fas fa-shopping-cart"></i>
           <span class="cart-count" id="cartCount">0</span>
         </a>
@@ -38,25 +41,7 @@
     </div>
   </header>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-header">
-      <a href="index.html" class="logo">
-        <i class="fas fa-leaf"></i>
-        <span>Asim Agro</span>
-      </a>
-      <button class="close-menu" id="closeMenu">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <nav class="mobile-nav-links">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About Us</a>
-      <a href="research.html">Research</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-
+  <!-- Main Content -->
   <main>
     <div class="page-header">
       <div class="container">
@@ -85,7 +70,7 @@
             <h2>Order Summary</h2>
             <div class="summary-item">
               <span>Subtotal</span>
-              <span id="subtotal">$0.00</span>
+              <span id="subtotal"> 0.00</span>
             </div>
             <div class="summary-item">
               <span>Shipping</span>
@@ -93,13 +78,40 @@
             </div>
             <div class="summary-total">
               <span>Total</span>
-              <span id="total">$0.00</span>
+              <span id="total"> 0.00</span>
             </div>
-            <button class="btn btn-primary btn-block">Proceed to Checkout</button>
+            <button class="btn btn-primary btn-block" id="proceedToCheckout">Proceed to Checkout</button>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Checkout Form (Popup) -->
+    <div class="overlay" id="overlay"></div>
+    <div class="checkout-popup" id="checkoutForm">
+      <button class="close-popup" id="closePopup">&times;</button>
+      <h2>Checkout</h2>
+      <form id="checkoutFormSubmit" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="d9de7308-1bd4-4bd0-8e50-b968f3ce74cb">        
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" required>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" required>
+        </div>
+        <div>
+          <label for="phone">Phone:</label>
+          <input type="tel" name="phone" id="phone" required>
+        </div>
+        <div>
+          <label for="orderDetails">Order Details:</label>
+          <textarea name="orderDetails" id="orderDetails" required readonly></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Order</button>
+      </form>
+    </div>
   </main>
 
   <footer class="footer">
@@ -143,10 +155,10 @@
         <div class="footer-contact">
           <h3>Contact Info</h3>
           <address>
-            <p>123 Agriculture Road</p>
-            <p>Farmington, AG 12345</p>
-            <p>Phone: +1 (555) 123-4567</p>
-            <p>Email: info@asimagro.com</p>
+            <p>Asim Agro Research,Kadegoan </p>
+            <p>Maharashtra, India</p>
+            <p>Phone: +91 9421132407</p>
+            <p>Email:info@asimagroresearch.com</p>
           </address>
         </div>
       </div>
@@ -161,8 +173,34 @@
     </div>
   </footer>
 
+
   <script src="js/products.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
+
+  <script>
+    // Show the popup when clicking on 'Proceed to Checkout'
+    document.getElementById('proceedToCheckout').addEventListener('click', function() {
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('checkoutForm').style.display = 'block';
+
+      // Collect cart details
+      const cartDetails = JSON.parse(localStorage.getItem('cart'));
+      const orderDetails = cartDetails.map(item => `${item.name} (x${item.quantity})`).join(', ');
+      document.getElementById('orderDetails').value = orderDetails;
+    });
+
+    // Close the popup when clicking on the close button
+    document.getElementById('closePopup').addEventListener('click', function() {
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('checkoutForm').style.display = 'none';
+    });
+
+    // Close the popup if clicking outside the form
+    document.getElementById('overlay').addEventListener('click', function() {
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('checkoutForm').style.display = 'none';
+    });
+  </script>
 </body>
 </html>
