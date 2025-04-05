@@ -103,7 +103,15 @@
         </div>
         <div>
           <label for="phone">Phone:</label>
-          <input type="tel" name="phone" id="phone" required>
+          <input type="tel" name="phone" id="phone" required pattern="^\d{10}$" maxlength="10" inputmode="numeric">
+        </div>
+        <div>
+          <label for="phone">Address</label>
+          <input type="text" name="Address" id="Address" required>
+        </div>
+        <div>
+          <label for="phone">PINCODE</label>
+          <input type="text" name="PINCODE" id="PINCODE" required pattern="^\d{6}$" maxlength="6" inputmode="numeric">
         </div>
         <div>
           <label for="orderDetails">Order Details:</label>

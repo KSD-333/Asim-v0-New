@@ -84,9 +84,11 @@ function updateCartCount() {
 
 // Format price to currency
 function formatPrice(price) {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-IN', {
     style: 'currency',
-    currency: 'USD'
+    currency: 'INR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2
   }).format(price);
 }
 
@@ -203,3 +205,36 @@ document.addEventListener('DOMContentLoaded', () => {
   loadCart();
   renderCart();
 });
+
+  document.getElementById('checkoutFormSubmit').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent default Web3Forms redirect
+
+    const name = document.getElementById('name').value.trim();
+    const orderDetails = document.getElementById('orderDetails').value.trim();
+
+    // Optional: Validate form again here if needed
+
+    // 1. Display the order section
+    const confirmationSection = document.createElement('div');
+    confirmationSection.className = 'order-confirmation';
+    confirmationSection.innerHTML = `
+      <h2>Thank You, ${name}!</h2>
+      <p>Your order has been placed successfully.</p>
+      <h4>Order Summary:</h4>
+      <p>${orderDetails}</p>
+      <a href="products.html" class="btn btn-primary">Continue Shopping</a>
+    `;
+    document.querySelector('main').appendChild(confirmationSection);
+
+    // 2. Clear cart and localStorage
+    localStorage.removeItem('cart');
+    cart = [];
+    renderCart(); // Refresh cart UI
+
+    // 3. Clear form inputs
+    document.getElementById('checkoutFormSubmit').reset();
+
+    // 4. Close popup
+    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('checkoutForm').style.display = 'none';
+  });
