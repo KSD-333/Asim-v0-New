@@ -5,9 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asim Agro - Agricultural Excellence</title>
   <meta name="description" content="Leading agricultural company providing innovative solutions">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="images/jpeg" href="images/logo.jpeg">
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="css/components/base.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/hero.css">
+  <link rel="stylesheet" href="css/components/products.css">
+  <link rel="stylesheet" href="css/components/about.css">
+  <link rel="stylesheet" href="css/components/reasearch.css">
+  <link rel="stylesheet" href="css/components/contact.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
 </head>
 <body>
   <header class="navbar">
@@ -18,11 +32,11 @@
       </a>
       
       <nav class="nav-links">
-        <a href="/index.html" class="active">Home</a>
-        <a href="/products.html">Products</a>
-        <a href="/about.html">About Us</a>
-        <a href="/research.html">Research</a>
-        <a href="/contact.html">Contact</a>
+        <a href="index.html" class="active">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About Us</a>
+        <a href="research.html">Research</a>
+        <a href="contact.html">Contact</a>
       </nav>
       
       <div class="nav-actions">
@@ -38,6 +52,7 @@
     </div>
   </header>
 
+  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
       <a href="index.html" class="logo">
@@ -107,7 +122,7 @@
       <div class="container">
         <div class="about-content">
           <div class="about-image">
-            <img src="images/owner.jpeg" alt="About Asim Agro" ">
+            <img src="images/owner.jpeg" alt="About Asim Agro">
           </div>
           <div class="about-text">
             <h2>About Asim Agro</h2>
@@ -175,7 +190,7 @@
           <p>Contact us today to learn how our products and expertise can help you achieve sustainable growth.</p>
           <div class="cta-buttons">
             <a href="contact.html" class="btn btn-secondary">Contact Us</a>
-            <a href="products.html" class="btn btn-outline-light">Explore Products</a>
+            <a href="products.html" class="btn btn-secondary">Explore Products</a>
           </div>
         </div>
       </div>
@@ -223,10 +238,10 @@
         <div class="footer-contact">
           <h3>Contact Info</h3>
           <address>
-            <p>Asim Agro Research,Kadegoan </p>
+            <p>Asim Agro Research, Kadegoan</p>
             <p>Maharashtra, India</p>
             <p>Phone: +91 9421132407</p>
-            <p>Email:info@asimagroresearch.com</p>
+            <p>Email: info@asimagroresearch.com</p>
           </address>
         </div>
       </div>
@@ -241,8 +256,47 @@
     </div>
   </footer>
 
-  <script src="js/products.js"></script>
-  <script src="js/cart.js"></script>
+  <!-- JavaScript Files -->
   <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script>
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+    });
+    
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+    });
+    
+    // Product filtering functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        btn.classList.add('active');
+        // Filter products (implementation depends on your products.js)
+        const category = btn.dataset.category;
+        filterProducts(category);
+      });
+    });
+    
+    // This function would be implemented in your products.js
+    function filterProducts(category) {
+      // Implementation depends on how you're loading products
+      console.log(`Filtering by: ${category}`);
+    }
+  </script>
 </body>
 </html>

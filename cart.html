@@ -5,12 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cart - Asim Agro</title>
   <meta name="description" content="Your shopping cart">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="images/jpeg" href="images/logo.jpeg">
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="/css/components/base.css">
+  <link rel="stylesheet" href="/css/components/buttons.css">
+  <link rel="stylesheet" href="/css/components/navbar.css">
+  <link rel="stylesheet" href="/css/components/cart.css">
+  <link rel="stylesheet" href="/css/components/footer.css">
+
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* Your popup-related CSS code goes here... */
-  </style>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
 </head>
 <body>
   <header class="navbar">
@@ -19,27 +26,47 @@
         <i class="fas fa-leaf"></i>
         <span>Asim Agro</span>
       </a>
-      
+
       <nav class="nav-links">
-        <a href="/index.html" class="active">Home</a>
-        <a href="/products.html">Products</a>
-        <a href="/about.html">About Us</a>
-        <a href="/research.html">Research</a>
-        <a href="/contact.html">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About Us</a>
+        <a href="research.html">Research</a>
+        <a href="contact.html">Contact</a>
       </nav>
-      
+
       <div class="nav-actions">
         <a href="cart.html" class="cart-icon">
           <i class="fas fa-shopping-cart"></i>
           <span class="cart-count" id="cartCount">0</span>
         </a>
-        
+
         <button class="menu-toggle" id="menuToggle">
           <i class="fas fa-bars"></i>
         </button>
       </div>
     </div>
   </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i>
+        <span>Asim Agro</span>
+      </a>
+      <button class="close-menu" id="closeMenu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About Us</a>
+      <a href="research.html">Research</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
 
   <!-- Main Content -->
   <main>
@@ -60,17 +87,18 @@
           <div class="cart-items">
             <div class="cart-items-container" id="cartItems">
               <!-- Cart items will be loaded here via JavaScript -->
+               
             </div>
             <div class="cart-actions">
               <button class="btn btn-outline" id="clearCart">Clear Cart</button>
             </div>
           </div>
-          
+
           <div class="cart-summary">
             <h2>Order Summary</h2>
             <div class="summary-item">
               <span>Subtotal</span>
-              <span id="subtotal"> 0.00</span>
+              <span id="subtotal">₹0.00</span>
             </div>
             <div class="summary-item">
               <span>Shipping</span>
@@ -78,7 +106,7 @@
             </div>
             <div class="summary-total">
               <span>Total</span>
-              <span id="total"> 0.00</span>
+              <span id="total">₹0.00</span>
             </div>
             <button class="btn btn-primary btn-block" id="proceedToCheckout">Proceed to Checkout</button>
           </div>
@@ -93,27 +121,27 @@
       <h2>Checkout</h2>
       <form id="checkoutFormSubmit" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="d9de7308-1bd4-4bd0-8e50-b968f3ce74cb">        
-        <div>
+        <div class="form-group">
           <label for="name">Name:</label>
           <input type="text" name="name" id="name" required>
         </div>
-        <div>
+        <div class="form-group">
           <label for="email">Email:</label>
           <input type="email" name="email" id="email" required>
         </div>
-        <div>
+        <div class="form-group">
           <label for="phone">Phone:</label>
           <input type="tel" name="phone" id="phone" required pattern="^\d{10}$" maxlength="10" inputmode="numeric">
         </div>
-        <div>
-          <label for="phone">Address</label>
-          <input type="text" name="Address" id="Address" required>
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <input type="text" name="address" id="address" required>
         </div>
-        <div>
-          <label for="phone">PINCODE</label>
-          <input type="text" name="PINCODE" id="PINCODE" required pattern="^\d{6}$" maxlength="6" inputmode="numeric">
+        <div class="form-group">
+          <label for="pincode">PINCODE:</label>
+          <input type="text" name="pincode" id="pincode" required pattern="^\d{6}$" maxlength="6" inputmode="numeric">
         </div>
-        <div>
+        <div class="form-group">
           <label for="orderDetails">Order Details:</label>
           <textarea name="orderDetails" id="orderDetails" required readonly></textarea>
         </div>
@@ -138,7 +166,7 @@
             <a href="#"><i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
-        
+
         <div class="footer-links">
           <h3>Quick Links</h3>
           <ul>
@@ -149,7 +177,7 @@
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-links">
           <h3>Products</h3>
           <ul>
@@ -159,18 +187,18 @@
             <li><a href="products.html">Tools & Equipment</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-contact">
           <h3>Contact Info</h3>
           <address>
-            <p>Asim Agro Research,Kadegoan </p>
+            <p>Asim Agro Research, Kadegoan</p>
             <p>Maharashtra, India</p>
             <p>Phone: +91 9421132407</p>
-            <p>Email:info@asimagroresearch.com</p>
+            <p>Email: info@asimagroresearch.com</p>
           </address>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; <span id="currentYear"></span> Asim Agro. All rights reserved.</p>
         <div class="footer-bottom-links">
@@ -181,34 +209,8 @@
     </div>
   </footer>
 
-
-  <script src="js/products.js"></script>
-  <script src="js/cart.js"></script>
+  <!-- JavaScript Files -->
   <script src="js/main.js"></script>
-
-  <script>
-    // Show the popup when clicking on 'Proceed to Checkout'
-    document.getElementById('proceedToCheckout').addEventListener('click', function() {
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById('checkoutForm').style.display = 'block';
-
-      // Collect cart details
-      const cartDetails = JSON.parse(localStorage.getItem('cart'));
-      const orderDetails = cartDetails.map(item => `${item.name} (x${item.quantity})`).join(', ');
-      document.getElementById('orderDetails').value = orderDetails;
-    });
-
-    // Close the popup when clicking on the close button
-    document.getElementById('closePopup').addEventListener('click', function() {
-      document.getElementById('overlay').style.display = 'none';
-      document.getElementById('checkoutForm').style.display = 'none';
-    });
-
-    // Close the popup if clicking outside the form
-    document.getElementById('overlay').addEventListener('click', function() {
-      document.getElementById('overlay').style.display = 'none';
-      document.getElementById('checkoutForm').style.display = 'none';
-    });
-  </script>
+  <script src="js/cart.js"></script>
 </body>
 </html>

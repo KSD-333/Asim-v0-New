@@ -5,9 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - Asim Agro</title>
   <meta name="description" content="Get in touch with Asim Agro">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="images/jpeg" href="images/logo.jpeg">
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="css/components/base.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/contact.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
 </head>
 <body>
   <header class="navbar">
@@ -24,8 +34,38 @@
         <a href="research.html">Research</a>
         <a href="contact.html" class="active">Contact</a>
       </nav>
+      
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
     </div>
   </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i>
+        <span>Asim Agro</span>
+      </a>
+      <button class="close-menu" id="closeMenu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About Us</a>
+      <a href="research.html">Research</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </div>
 
   <main>
     <div class="page-header">
@@ -70,7 +110,7 @@
             <div class="contact-card-content">
               <h3>Email</h3>
               <p>Send us a message</p>
-              <p>info@asimagro.com</p>
+              <p>info@asimagroresearch.com</p>
             </div>
           </div>
         </div>
@@ -216,10 +256,10 @@
         <div class="footer-contact">
           <h3>Contact Info</h3>
           <address>
-            <p>Asim Agro Research,Kadegoan </p>
+            <p>Asim Agro Research, Kadegoan</p>
             <p>Maharashtra, India</p>
             <p>Phone: +91 9421132407</p>
-            <p>Email:info@asimagroresearch.com</p>
+            <p>Email: info@asimagroresearch.com</p>
           </address>
         </div>
       </div>
@@ -234,7 +274,41 @@
     </div>
   </footer>
 
-
+  <!-- JavaScript Files -->
   <script src="js/main.js"></script>
+  <script>
+    // Tab functionality
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons and panes
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanes.forEach(p => p.classList.remove('active'));
+        
+        // Add active class to clicked button and corresponding pane
+        btn.classList.add('active');
+        const tabId = btn.getAttribute('data-tab');
+        document.getElementById(`${tabId}Tab`).classList.add('active');
+      });
+    });
+    
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+    });
+    
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+    });
+  </script>
 </body>
 </html>

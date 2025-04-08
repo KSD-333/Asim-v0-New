@@ -1,240 +1,164 @@
-// Cart functionality
-let cart = [];
+// ---------- CART UTILITIES ----------
+function getCart() {
+  return JSON.parse(localStorage.getItem("cart")) || [];
+}
 
-// Load cart from localStorage
-function loadCart() {
-  const savedCart = localStorage.getItem('cart');
-  if (savedCart) {
-    try {
-      cart = JSON.parse(savedCart);
-    } catch (error) {
-      console.error('Failed to parse cart from localStorage:', error);
-      cart = [];
-    }
+function saveCart(cart) {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function updateCartCount() {
+  const cart = getCart();
+  const totalCount = cart.reduce((total, item) => total + item.quantity, 0);
+  document.getElementById("cartCount").textContent = totalCount;
+}
+
+function updateOrderDetails(cart) {
+  const orderDetails = cart.map(item =>
+    `${item.name} (x${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}`
+  ).join('\n');
+
+  document.getElementById("orderDetails").value = orderDetails;
+}
+
+function updateCartDisplay() {
+  const cart = getCart();
+  const cartItemsContainer = document.getElementById("cartItems");
+  const emptyCart = document.getElementById("emptyCart");
+  const cartContent = document.getElementById("cartContent");
+
+  cartItemsContainer.innerHTML = "";
+
+  if (cart.length === 0) {
+    emptyCart.style.display = "block";
+    cartContent.style.display = "none";
+    updateCartCount();
+    return;
   }
+
+  emptyCart.style.display = "none";
+  cartContent.style.display = "flex";
+
+  let subtotal = 0;
+
+  cart.forEach((item, index) => {
+    const itemTotal = item.price * item.quantity;
+    subtotal += itemTotal;
+
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "cart-item";
+    itemDiv.innerHTML = `
+      <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+      <div class="cart-item-details">
+        <h3>${item.name}</h3>
+        <p>₹${item.price.toFixed(2)}</p>
+        <div class="quantity-control">
+          <button class="decrease-btn" data-index="${index}">-</button>
+          <input type="number" class="quantity-input" data-index="${index}" value="${item.quantity}" min="1">
+          <button class="increase-btn" data-index="${index}">+</button>
+        </div>
+        <button class="remove-btn" data-index="${index}"><i class="fas fa-trash"></i></button>
+      </div>
+    `;
+    cartItemsContainer.appendChild(itemDiv);
+  });
+
+  document.getElementById("subtotal").textContent = `₹${subtotal.toFixed(2)}`;
+  document.getElementById("total").textContent = `₹${subtotal.toFixed(2)}`;
   updateCartCount();
+
+  // Quantity input listeners
+  document.querySelectorAll('.quantity-input').forEach(input => {
+    input.addEventListener('change', function (e) {
+      const index = parseInt(e.target.dataset.index);
+      let value = parseInt(e.target.value);
+      if (isNaN(value) || value < 1) {
+        value = 1;
+        e.target.value = 1;
+      }
+      const cart = getCart();
+      cart[index].quantity = value;
+      saveCart(cart);
+      updateCartDisplay();
+    });
+  });
+
+  updateOrderDetails(cart);
 }
 
-// Save cart to localStorage
-function saveCart() {
-  localStorage.setItem('cart', JSON.stringify(cart));
-  updateCartCount();
-}
+// ---------- CART ACTION HANDLERS ----------
+document.addEventListener("DOMContentLoaded", function () {
+  updateCartDisplay();
 
-// Add product to cart
+  document.getElementById("cartItems").addEventListener("click", function (e) {
+    const cart = getCart();
+    const index = parseInt(e.target.dataset.index);
+
+    if (e.target.classList.contains("increase-btn")) {
+      cart[index].quantity++;
+    } else if (e.target.classList.contains("decrease-btn")) {
+      if (cart[index].quantity > 1) {
+        cart[index].quantity--;
+      } else {
+        cart.splice(index, 1);
+      }
+    } else if (e.target.closest(".remove-btn")) {
+      cart.splice(index, 1);
+    }
+
+    saveCart(cart);
+    updateCartDisplay();
+  });
+
+  document.getElementById("clearCart").addEventListener("click", function () {
+    localStorage.removeItem("cart");
+    updateCartDisplay();
+  });
+
+  document.getElementById("checkoutFormSubmit").addEventListener("submit", function () {
+    localStorage.removeItem("cart");
+    setTimeout(() => {
+      updateCartDisplay();
+      document.getElementById("checkoutFormSubmit").reset();
+      document.getElementById("checkoutForm").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }, 500);
+  });
+
+  document.getElementById("proceedToCheckout").addEventListener("click", () => {
+    const cart = getCart();
+    if (cart.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+    updateOrderDetails(cart);
+    document.getElementById("checkoutForm").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+  });
+
+  document.getElementById("closePopup").addEventListener("click", () => {
+    document.getElementById("checkoutForm").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  });
+
+  document.getElementById("overlay").addEventListener("click", () => {
+    document.getElementById("checkoutForm").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  });
+});
+
+// ---------- ADD TO CART ----------
 function addToCart(product) {
+  const cart = getCart();
   const existingItem = cart.find(item => item.id === product.id);
-  
   if (existingItem) {
     existingItem.quantity += 1;
   } else {
-    cart.push({
-      ...product,
-      quantity: 1
-    });
+    product.quantity = 1;
+    cart.push(product);
   }
-  
-  saveCart();
+  saveCart(cart);
+  updateCartCount();
 }
 
-// Remove product from cart
-function removeFromCart(productId) {
-  cart = cart.filter(item => item.id !== productId);
-  saveCart();
-  renderCart();
-}
-
-// Update product quantity in cart
-function updateQuantity(productId, quantity) {
-  const item = cart.find(item => item.id === productId);
-  
-  if (item) {
-    item.quantity = quantity;
-    if (item.quantity <= 0) {
-      removeFromCart(productId);
-    } else {
-      saveCart();
-      renderCart();
-    }
-  }
-}
-
-// Clear cart
-function clearCart() {
-  cart = [];
-  saveCart();
-  renderCart();
-}
-
-// Update cart count in navbar
-function updateCartCount() {
-  const cartCountElements = document.querySelectorAll('#cartCount');
-  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-  
-  cartCountElements.forEach(element => {
-    element.textContent = totalItems;
-    
-    if (totalItems > 0) {
-      element.style.display = 'flex';
-    } else {
-      element.style.display = 'none';
-    }
-  });
-}
-
-// Format price to currency
-function formatPrice(price) {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2
-  }).format(price);
-}
-
-// Calculate cart subtotal
-function calculateSubtotal() {
-  return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-}
-
-// Render cart items
-function renderCart() {
-  const cartItemsContainer = document.getElementById('cartItems');
-  const emptyCartElement = document.getElementById('emptyCart');
-  const cartContentElement = document.getElementById('cartContent');
-  const subtotalElement = document.getElementById('subtotal');
-  const totalElement = document.getElementById('total');
-  
-  if (!cartItemsContainer) return;
-  
-  if (cart.length === 0) {
-    if (emptyCartElement) emptyCartElement.style.display = 'block';
-    if (cartContentElement) cartContentElement.style.display = 'none';
-    return;
-  }
-  
-  if (emptyCartElement) emptyCartElement.style.display = 'none';
-  if (cartContentElement) cartContentElement.style.display = 'grid';
-  
-  cartItemsContainer.innerHTML = cart.map(item => `
-    <div class="cart-item">
-      <div class="cart-item-image">
-        <img src="${item.image}" alt="${item.name}">
-      </div>
-      <div class="cart-item-details">
-        <h3 class="cart-item-name">${item.name}</h3>
-        <p class="cart-item-price">${formatPrice(item.price)}</p>
-      </div>
-      <div class="cart-item-actions">
-        <button class="quantity-btn decrease-btn" data-id="${item.id}">-</button>
-        <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}">
-        <button class="quantity-btn increase-btn" data-id="${item.id}">+</button>
-        <button class="remove-btn" data-id="${item.id}">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    </div>
-  `).join('');
-  
-  const subtotal = calculateSubtotal();
-  if (subtotalElement) subtotalElement.textContent = formatPrice(subtotal);
-  if (totalElement) totalElement.textContent = formatPrice(subtotal);
-  
-  // Add event listeners to cart item buttons
-  addCartItemListeners();
-}
-
-// Add event listeners to cart item buttons
-function addCartItemListeners() {
-  // Decrease quantity buttons
-  const decreaseButtons = document.querySelectorAll('.decrease-btn');
-  decreaseButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const productId = parseInt(button.getAttribute('data-id'));
-      const item = cart.find(item => item.id === productId);
-      if (item) {
-        updateQuantity(productId, item.quantity - 1);
-      }
-    });
-  });
-  
-  // Increase quantity buttons
-  const increaseButtons = document.querySelectorAll('.increase-btn');
-  increaseButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const productId = parseInt(button.getAttribute('data-id'));
-      const item = cart.find(item => item.id === productId);
-      if (item) {
-        updateQuantity(productId, item.quantity + 1);
-      }
-    });
-  });
-  
-  // Quantity input fields
-  const quantityInputs = document.querySelectorAll('.quantity-input');
-  quantityInputs.forEach(input => {
-    input.addEventListener('change', () => {
-      const productId = parseInt(input.getAttribute('data-id'));
-      const quantity = parseInt(input.value);
-      if (!isNaN(quantity) && quantity > 0) {
-        updateQuantity(productId, quantity);
-      } else {
-        renderCart(); // Reset invalid input
-      }
-    });
-  });
-  
-  // Remove buttons
-  const removeButtons = document.querySelectorAll('.remove-btn');
-  removeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const productId = parseInt(button.getAttribute('data-id'));
-      removeFromCart(productId);
-    });
-  });
-  
-  // Clear cart button
-  const clearCartButton = document.getElementById('clearCart');
-  if (clearCartButton) {
-    clearCartButton.addEventListener('click', clearCart);
-  }
-}
-
-// Initialize cart when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  loadCart();
-  renderCart();
-});
-
-  document.getElementById('checkoutFormSubmit').addEventListener('submit', function (e) {
-    e.preventDefault(); // Prevent default Web3Forms redirect
-
-    const name = document.getElementById('name').value.trim();
-    const orderDetails = document.getElementById('orderDetails').value.trim();
-
-    // Optional: Validate form again here if needed
-
-    // 1. Display the order section
-    const confirmationSection = document.createElement('div');
-    confirmationSection.className = 'order-confirmation';
-    confirmationSection.innerHTML = `
-      <h2>Thank You, ${name}!</h2>
-      <p>Your order has been placed successfully.</p>
-      <h4>Order Summary:</h4>
-      <p>${orderDetails}</p>
-      <a href="products.html" class="btn btn-primary">Continue Shopping</a>
-    `;
-    document.querySelector('main').appendChild(confirmationSection);
-
-    // 2. Clear cart and localStorage
-    localStorage.removeItem('cart');
-    cart = [];
-    renderCart(); // Refresh cart UI
-
-    // 3. Clear form inputs
-    document.getElementById('checkoutFormSubmit').reset();
-
-    // 4. Close popup
-    document.getElementById('overlay').style.display = 'none';
-    document.getElementById('checkoutForm').style.display = 'none';
-  });
+document.addEventListener("DOMContentLoaded", updateCartCount);

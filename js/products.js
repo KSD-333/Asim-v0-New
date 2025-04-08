@@ -21,7 +21,7 @@ const products = [
   {
       "id": 3,
       "name": "HALLA 505",
-      "description": "CHLORPYRIPHOS 50% + CYPERMETHRIN 5% EC",
+      "description": "CHLORPYRIPHOS 50% ",
       "price": 120.00,
       "image": "images/halla-505.jpeg",
       "category": "pesticides",
@@ -30,7 +30,7 @@ const products = [
   {
       "id": 4,
       "name": "ASIM GLYFO-71",
-      "description": "AMMONIUM SALT OF GLYPHOSATE 71% SG",
+      "description": "AMMONIUM SALT OF GLYPHOSATE",
       "price": 400.00,
       "image": "images/asim-glyfo-71.jpeg",
       "category": "fertilizers",
