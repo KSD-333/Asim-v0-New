@@ -60,7 +60,7 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  background-color: var(--primary-light);
+  background-color: rgb(46, 125, 50);
   color: var(--text-white);
   transition: var(--transition);
 }

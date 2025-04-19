@@ -151,8 +151,8 @@
                       <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                      <label for="phone">Phone (optional)</label>
-                      <input type="tel" id="phone" name="phone_number">
+                      <label for="phone">Phone</label>
+                      <input type="tel" id="phone" name="phone_number" required pattern="^\d{10}$" maxlength="10" inputmode="numeric>
                     </div>
                     <div class="form-group">
                       <label for="subject">Subject</label>
