@@ -1,0 +1,136 @@
+   /* Base Styles */
+   .chat-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    max-width: 90vw;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+}
+
+.chat-header {
+    background: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.chat-body {
+    height: 400px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 15px;
+    display: none;
+}
+
+.chat-message {
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 85%;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.user-message {
+    background: #e9ecef;
+    margin-left: auto;
+}
+
+.bot-message {
+    background: #4CAF50;
+    color: white;
+}
+
+.input-container {
+    padding: 15px;
+    display: none;
+    gap: 10px;
+    border-top: 1px solid #eee;
+}
+
+input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 0.9rem;
+}
+
+button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    min-width: 70px;
+}
+
+.typing-indicator {
+    display: none;
+    padding: 10px 15px;
+    font-style: italic;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .chat-container {
+        width: 90%;
+        right: 5%;
+        bottom: 10px;
+    }
+
+    .chat-header {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .chat-body {
+        max-height: 50vh;
+    }
+
+    .chat-message {
+        max-width: 90%;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    button {
+        padding: 10px 15px;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .chat-container {
+        width: 400px;
+        right: 30px;
+    }
+
+    .chat-body {
+        max-height: 55vh;
+    }
+}
+
+/* Landscape Mobile Fix */
+@media (max-height: 500px) and (orientation: landscape) {
+    .chat-body {
+        max-height: 40vh;
+    }
+}

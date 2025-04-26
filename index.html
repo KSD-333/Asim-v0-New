@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/components/reasearch.css">
   <link rel="stylesheet" href="css/components/contact.css">
   <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="css/components/chatbot.css">
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -195,8 +196,23 @@
         </div>
       </div>
     </section>
-  </main>
-
+    <div class="chat-container">
+      <div class="chat-header" onclick="toggleChat()">
+          Agriculture Assistant 🌱
+      </div>
+      <div class="chat-body" id="chatBody">
+          <div class="chat-message bot-message">
+              Hi! I'm your agriculture assistant. Ask me about crops like wheat, tomato, or potato!
+          </div>
+      </div>
+      <div class="typing-indicator" id="typing">Bot is typing...</div>
+      <div class="input-container">
+          <input type="text" id="userInput" placeholder="Enter crop name...">
+          <button onclick="processInput()">Send</button>
+      </div>
+  </div>
+</main>
+  
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
@@ -260,6 +276,7 @@
   <script src="js/main.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/products.js"></script>
+  <script src="js/chatbot.js"></script>
   <script>
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();

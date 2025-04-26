@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/css/components/navbar.css">
   <link rel="stylesheet" href="/css/components/cart.css">
   <link rel="stylesheet" href="/css/components/footer.css">
+  <link rel="stylesheet" href="/css/components/chatbot.css">
   <link rel="icon" type="images/jpeg" href="images/logo.jpeg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -84,6 +85,21 @@
         </div>
       </div>
     </section>
+    <div class="chat-container">
+      <div class="chat-header" onclick="toggleChat()">
+          Agriculture Assistant 🌱
+      </div>
+      <div class="chat-body" id="chatBody">
+          <div class="chat-message bot-message">
+              Hi! I'm your agriculture assistant. Ask me about crops like wheat, tomato, or potato!
+          </div>
+      </div>
+      <div class="typing-indicator" id="typing">Bot is typing...</div>
+      <div class="input-container">
+          <input type="text" id="userInput" placeholder="Enter crop name...">
+          <button onclick="processInput()">Send</button>
+      </div>
+  </div>
   </main>
   
   <footer class="footer">
@@ -147,5 +163,6 @@
   <script src="js/products.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/chatbot.js"></script>
 </body>
 </html>
