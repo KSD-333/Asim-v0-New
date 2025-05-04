@@ -8,31 +8,39 @@ function saveCart(cart) {
 }
 
 function updateCartCount() {
-  const cart = getCart();
-  document.getElementById("cartCount").textContent = cart.length;
+  const cartCountElement = document.getElementById("cartCount");
+  if (cartCountElement) {
+    const cart = getCart();
+    cartCountElement.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+  }
 }
 
 function updateOrderDetails(cart) {
-  const orderDetails = cart.map(item =>
-    `${item.name} (${item.selectedSize}) - ${item.quantity} x ${formatPrice(item.price)}`
-  ).join('\n');
-
-  document.getElementById("orderDetails").value = orderDetails;
+  const orderDetailsElement = document.getElementById("orderDetails");
+  if (orderDetailsElement) {
+    orderDetailsElement.value = cart.map(item => 
+      `${item.name} (${item.selectedSize}) - ${item.quantity} x ${formatPrice(item.price)}`
+    ).join('\n');
+  }
 }
 
 function formatPrice(price) {
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
-    currency: 'INR'
+    currency: 'INR',
+    minimumFractionDigits: 2
   }).format(price);
 }
 
+// ---------- CART DISPLAY ----------
 function updateCartDisplay() {
-  const cart = getCart();
   const cartItemsContainer = document.getElementById("cartItems");
   const emptyCart = document.getElementById("emptyCart");
   const cartContent = document.getElementById("cartContent");
+  
+  if (!cartItemsContainer || !emptyCart || !cartContent) return;
 
+  const cart = getCart();
   cartItemsContainer.innerHTML = "";
 
   if (cart.length === 0) {
@@ -60,7 +68,7 @@ function updateCartDisplay() {
         <p>${formatPrice(item.price)}</p>
         <div class="quantity-control">
           <button class="quantity-btn decrease-btn" data-index="${index}">-</button>
-          <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-index="${index}">
+          <input type="number" class="quantity-input" value="${item.quantity}" min="1">
           <button class="quantity-btn increase-btn" data-index="${index}">+</button>
         </div>
         <button class="remove-btn" data-index="${index}"><i class="fas fa-trash"></i></button>
@@ -73,94 +81,99 @@ function updateCartDisplay() {
   document.getElementById("total").textContent = formatPrice(subtotal);
   updateCartCount();
   updateOrderDetails(cart);
-
-  // Add input listeners for manual quantity entry
-  document.querySelectorAll('.quantity-input').forEach(input => {
-    input.addEventListener('change', function(e) {
-      const index = parseInt(this.dataset.index);
-      const cart = getCart();
-      let newQuantity = parseInt(this.value) || 1;
-      
-      if (newQuantity < 1) {
-        newQuantity = 1;
-        this.value = 1;
-      }
-      
-      cart[index].quantity = newQuantity;
-      saveCart(cart);
-      updateCartDisplay();
-    });
-  });
 }
 
-// ---------- CART ACTION HANDLERS ----------
-document.addEventListener("DOMContentLoaded", function () {
+// ---------- EVENT HANDLERS ----------
+function handleCartActions(e) {
+  const cart = getCart();
+  const button = e.target.closest("button");
+  
+  if (!button) return;
+  
+  const index = parseInt(button.dataset.index);
+  if (isNaN(index)) return;
+
+  if (button.classList.contains("increase-btn")) {
+    cart[index].quantity++;
+  } else if (button.classList.contains("decrease-btn")) {
+    cart[index].quantity > 1 ? cart[index].quantity-- : cart.splice(index, 1);
+  } else if (button.classList.contains("remove-btn")) {
+    cart.splice(index, 1);
+  }
+
+  saveCart(cart);
   updateCartDisplay();
+}
 
-  document.getElementById("cartItems").addEventListener("click", function (e) {
-    const cart = getCart();
-    const index = parseInt(e.target.dataset.index || 
-      e.target.closest('button')?.dataset.index);
+function initializeCart() {
+  // Update cart count on all pages
+  updateCartCount();
 
-    if (!isNaN(index)) {
-      if (e.target.classList.contains("increase-btn")) {
-        cart[index].quantity++;
-      } else if (e.target.classList.contains("decrease-btn")) {
-        if (cart[index].quantity > 1) {
-          cart[index].quantity--;
-        } else {
-          cart.splice(index, 1);
-        }
-      } else if (e.target.closest(".remove-btn")) {
-        cart.splice(index, 1);
-      }
-
-      saveCart(cart);
-      updateCartDisplay();
-    }
-  });
-
-  document.getElementById("clearCart").addEventListener("click", function () {
-    localStorage.removeItem("asimAgroCart");
+  // Only initialize cart page features if on cart page
+  const cartItemsContainer = document.getElementById("cartItems");
+  if (cartItemsContainer) {
     updateCartDisplay();
-  });
+    
+    // Cart items container events
+    document.getElementById("cartItems").addEventListener("click", handleCartActions);
+    
+    // Clear cart button
+    document.getElementById("clearCart")?.addEventListener("click", () => {
+      localStorage.removeItem("asimAgroCart");
+      updateCartDisplay();
+    });
 
-  document.getElementById("proceedToCheckout").addEventListener("click", () => {
-    const cart = getCart();
-    if (cart.length === 0) {
-      alert("Your cart is empty!");
-      return;
-    }
-    updateOrderDetails(cart);
-    document.getElementById("checkoutForm").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
-  });
+    // Checkout button
+    document.getElementById("proceedToCheckout")?.addEventListener("click", () => {
+      if (getCart().length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      document.getElementById("checkoutForm").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    });
 
-  document.getElementById("closePopup").addEventListener("click", () => {
-    document.getElementById("checkoutForm").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
-  });
+    // Close popup
+    document.getElementById("closePopup")?.addEventListener("click", () => {
+      document.getElementById("checkoutForm").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    });
 
-  document.getElementById("overlay").addEventListener("click", () => {
-    document.getElementById("checkoutForm").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
-  });
-});
+    // Overlay click
+    document.getElementById("overlay")?.addEventListener("click", () => {
+      document.getElementById("checkoutForm").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    });
+  }
+}
+
+// ---------- INITIALIZATION ----------
+document.addEventListener("DOMContentLoaded", initializeCart);
 
 // ---------- ADD TO CART FUNCTION ----------
-function addToCart(product) {
+window.addToCart = function(product) {
   const cart = getCart();
   const existingItem = cart.find(item => 
     item.id === product.id && item.selectedSize === product.selectedSize
   );
 
   if (existingItem) {
-    existingItem.quantity += 1;
+    existingItem.quantity++;
   } else {
-    product.quantity = 1;
-    cart.push(product);
+    cart.push({...product, quantity: 1});
   }
 
   saveCart(cart);
   updateCartCount();
-}
+  
+  // Show notification
+  const notification = document.createElement("div");
+  notification.className = "cart-notification";
+  notification.innerHTML = `
+    <i class="fas fa-check-circle"></i>
+    Added to cart!
+  `;
+  document.body.appendChild(notification);
+  
+  setTimeout(() => notification.remove(), 2000);
+};

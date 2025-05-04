@@ -7,11 +7,15 @@
   <meta name="description" content="Get in touch with Asim Agro">
   
   <!-- CSS Files -->
-  <link rel="stylesheet" href="css/components/base.css">
-  <link rel="stylesheet" href="css/components/buttons.css">
-  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="/css/components/base.css">
+  <link rel="stylesheet" href="/css/components/buttons.css">
+  <link rel="stylesheet" href="/css/components/navbar.css">
+  <link rel="stylesheet" href="/css/components/about.css">
+  <link rel="stylesheet" href="/css/components/footer.css">
+  <link rel="stylesheet" href="/css/components/hero.css">
+  <link rel="stylesheet" href="css/components/products.css">
+  <link rel="stylesheet" href="css/components/cart.css">
   <link rel="stylesheet" href="css/components/contact.css">
-  <link rel="stylesheet" href="css/components/footer.css">
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -39,6 +43,7 @@
         <a href="cart.html" class="cart-icon">
           <i class="fas fa-shopping-cart"></i>
           <span class="cart-count">0</span>
+          <span class="cart-count" id="cartCount">0</span> 
         </a>
         <button class="menu-toggle" id="menuToggle">
           <i class="fas fa-bars"></i>
@@ -274,8 +279,7 @@
     </div>
   </footer>
 
-  <!-- JavaScript Files -->
-  <script src="js/main.js"></script>
+
   <script>
     // Tab functionality
     const tabBtns = document.querySelectorAll('.tab-btn');
@@ -310,5 +314,11 @@
       mobileMenu.classList.remove('active');
     });
   </script>
+  
+<!-- JavaScript Files -->
+<script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/chatbot.js"></script>
 </body>
 </html>

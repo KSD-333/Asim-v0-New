@@ -13,7 +13,10 @@
   <link rel="stylesheet" href="/css/components/about.css">
   <link rel="stylesheet" href="/css/components/footer.css">
   <link rel="stylesheet" href="/css/components/hero.css">
-  
+  <link rel="stylesheet" href="css/components/products.css">
+  <link rel="stylesheet" href="css/components/cart.css">
+  <link rel="stylesheet" href="css/components/contact.css">
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -173,7 +176,14 @@
   </footer>
 
   <!-- JavaScript Files -->
-  <script src="js/main.js"></script>
-  <script src="js/cart.js"></script>
+<!-- JavaScript Files -->
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+  <script>
+    // Update cart count on page load
+    document.addEventListener("DOMContentLoaded", function() {
+      updateCartCount(); // Ensure this function is defined in cart.js
+    });
+  </script>
 </body>
 </html>
