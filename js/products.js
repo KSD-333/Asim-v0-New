@@ -362,6 +362,7 @@ function initCategoryFilters() {
         if (productsGrid) {
           productsGrid.innerHTML = filteredProducts.map(product => createProductCard(product)).join('');
           addToCartListeners();
+          
         }
       }
     });
