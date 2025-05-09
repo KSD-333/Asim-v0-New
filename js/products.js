@@ -161,97 +161,97 @@ const products = [
       "category": "pesticides",
       "packaging": ["10gm", "50gm"]
   },
-  {
-      "id": 13,
-      "name": "Tomato Seeds - Heirloom Variety",
-      "description": "High-quality heirloom tomato seeds for organic gardening.",
-      "prices": {
-        "50 seeds": 125.00
-      },
-      "image": "images/tomato-seeds.jpeg",
-      "category": "seeds",
-      "packaging": ["50 seeds"]
-  },
-  {
-      "id": 14,
-      "name": "Basil Seeds - Sweet Genovese",
-      "description": "Sweet Genovese basil seeds for aromatic and flavorful herbs.",
-      "prices": {
-        "100 seeds": 150.00
-      },
-      "image": "images/basil-seeds.jpeg",
-      "category": "seeds",
-      "packaging": ["100 seeds"]
-  },
-  {
-      "id": 15,
-      "name": "Carrot Seeds - Nantes Variety",
-      "description": "Nantes carrot seeds for sweet and crunchy carrots.",
-      "prices": {
-        "200 seeds": 75.00
-      },
-      "image": "images/carrot-seeds.jpeg",
-      "category": "seeds",
-      "packaging": ["200 seeds"]
-  },
-  {
-      "id": 16,
-      "name": "Sunflower Seeds - Giant Variety",
-      "description": "Giant sunflower seeds for tall and vibrant sunflowers.",
-      "prices": {
-        "30 seeds": 66.00
-      },
-      "image": "images/sunflower-seeds.jpeg",
-      "category": "seeds",
-      "packaging": ["30 seeds"]
-  },
-  {
-      "id": 17,
-      "name": "Bell Pepper Seeds - California Wonder",
-      "description": "California Wonder bell pepper seeds for large and sweet peppers.",
-      "prices": {
-        "50 seeds": 220.00
-      },
-      "image": "images/bell-pepper-seeds.jpeg",
-      "category": "seeds",
-      "packaging": ["50 seeds"]
-  },
-    {
-    "id": 18,
-    "name": "Gardening Tool Set",
-    "description": "Premium stainless steel gardening tools set",
-    "prices": {
-      "Basic Set": 1200.00,
-      "Professional Set": 2500.00
-    },
-    "image": "images/gardening-tools.jpg",
-    "category": "tools-equipment",
-    "packaging": ["Basic Set", "Professional Set"]
-},
-{
-    "id": 19,
-    "name": "Spray Pump",
-    "description": "16-liter manual spray pump",
-    "prices": {
-      "16L": 850.00,
-      "20L": 1100.00
-    },
-    "image": "images/spray-pump.jpg",
-    "category": "tools-equipment",
-    "packaging": ["16L", "20L"]
-},
-{
-    "id": 20,
-    "name": "Pruning Shears",
-    "description": "Professional grade pruning shears",
-    "prices": {
-      "Standard": 450.00,
-      "Premium": 800.00
-    },
-    "image": "images/pruning-shears.jpg",
-    "category": "tools-equipment",
-    "packaging": ["Standard", "Premium"]
-}
+//   {
+//       "id": 13,
+//       "name": "Tomato Seeds - Heirloom Variety",
+//       "description": "High-quality heirloom tomato seeds for organic gardening.",
+//       "prices": {
+//         "50 seeds": 125.00
+//       },
+//       "image": "images/tomato-seeds.jpeg",
+//       "category": "seeds",
+//       "packaging": ["50 seeds"]
+//   },
+//   {
+//       "id": 14,
+//       "name": "Basil Seeds - Sweet Genovese",
+//       "description": "Sweet Genovese basil seeds for aromatic and flavorful herbs.",
+//       "prices": {
+//         "100 seeds": 150.00
+//       },
+//       "image": "images/basil-seeds.jpeg",
+//       "category": "seeds",
+//       "packaging": ["100 seeds"]
+//   },
+//   {
+//       "id": 15,
+//       "name": "Carrot Seeds - Nantes Variety",
+//       "description": "Nantes carrot seeds for sweet and crunchy carrots.",
+//       "prices": {
+//         "200 seeds": 75.00
+//       },
+//       "image": "images/carrot-seeds.jpeg",
+//       "category": "seeds",
+//       "packaging": ["200 seeds"]
+//   },
+//   {
+//       "id": 16,
+//       "name": "Sunflower Seeds - Giant Variety",
+//       "description": "Giant sunflower seeds for tall and vibrant sunflowers.",
+//       "prices": {
+//         "30 seeds": 66.00
+//       },
+//       "image": "images/sunflower-seeds.jpeg",
+//       "category": "seeds",
+//       "packaging": ["30 seeds"]
+//   },
+//   {
+//       "id": 17,
+//       "name": "Bell Pepper Seeds - California Wonder",
+//       "description": "California Wonder bell pepper seeds for large and sweet peppers.",
+//       "prices": {
+//         "50 seeds": 220.00
+//       },
+//       "image": "images/bell-pepper-seeds.jpeg",
+//       "category": "seeds",
+//       "packaging": ["50 seeds"]
+//   },
+//     {
+//     "id": 18,
+//     "name": "Gardening Tool Set",
+//     "description": "Premium stainless steel gardening tools set",
+//     "prices": {
+//       "Basic Set": 1200.00,
+//       "Professional Set": 2500.00
+//     },
+//     "image": "images/gardening-tools.jpg",
+//     "category": "tools-equipment",
+//     "packaging": ["Basic Set", "Professional Set"]
+// },
+// {
+//     "id": 19,
+//     "name": "Spray Pump",
+//     "description": "16-liter manual spray pump",
+//     "prices": {
+//       "16L": 850.00,
+//       "20L": 1100.00
+//     },
+//     "image": "images/spray-pump.jpg",
+//     "category": "tools-equipment",
+//     "packaging": ["16L", "20L"]
+// },
+// {
+//     "id": 20,
+//     "name": "Pruning Shears",
+//     "description": "Professional grade pruning shears",
+//     "prices": {
+//       "Standard": 450.00,
+//       "Premium": 800.00
+//     },
+//     "image": "images/pruning-shears.jpg",
+//     "category": "tools-equipment",
+//     "packaging": ["Standard", "Premium"]
+// }
 ];
   // Format price to currency (unchanged)
 function formatPrice(price) {

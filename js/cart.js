@@ -68,7 +68,7 @@ function updateCartDisplay() {
         <p>${formatPrice(item.price)}</p>
         <div class="quantity-control">
           <button class="quantity-btn decrease-btn" data-index="${index}">-</button>
-          <input type="number" class="quantity-input" value="${item.quantity}" min="1">
+          <input type="number" class="quantity-input" data-index="${index}" value="${item.quantity}" min="1">
           <button class="quantity-btn increase-btn" data-index="${index}">+</button>
         </div>
         <button class="remove-btn" data-index="${index}"><i class="fas fa-trash"></i></button>
@@ -87,9 +87,9 @@ function updateCartDisplay() {
 function handleCartActions(e) {
   const cart = getCart();
   const button = e.target.closest("button");
-  
+
   if (!button) return;
-  
+
   const index = parseInt(button.dataset.index);
   if (isNaN(index)) return;
 
@@ -105,25 +105,35 @@ function handleCartActions(e) {
   updateCartDisplay();
 }
 
+function handleQuantityInput(e) {
+  if (e.target.classList.contains("quantity-input")) {
+    const index = parseInt(e.target.dataset.index);
+    const newQuantity = parseInt(e.target.value);
+
+    if (!isNaN(index) && !isNaN(newQuantity) && newQuantity >= 1) {
+      const cart = getCart();
+      cart[index].quantity = newQuantity;
+      saveCart(cart);
+      updateCartDisplay();
+    }
+  }
+}
+
 function initializeCart() {
-  // Update cart count on all pages
   updateCartCount();
 
-  // Only initialize cart page features if on cart page
   const cartItemsContainer = document.getElementById("cartItems");
   if (cartItemsContainer) {
     updateCartDisplay();
-    
-    // Cart items container events
-    document.getElementById("cartItems").addEventListener("click", handleCartActions);
-    
-    // Clear cart button
+
+    cartItemsContainer.addEventListener("click", handleCartActions);
+    cartItemsContainer.addEventListener("input", handleQuantityInput);
+
     document.getElementById("clearCart")?.addEventListener("click", () => {
       localStorage.removeItem("asimAgroCart");
       updateCartDisplay();
     });
 
-    // Checkout button
     document.getElementById("proceedToCheckout")?.addEventListener("click", () => {
       if (getCart().length === 0) {
         alert("Your cart is empty!");
@@ -133,13 +143,11 @@ function initializeCart() {
       document.getElementById("overlay").style.display = "block";
     });
 
-    // Close popup
     document.getElementById("closePopup")?.addEventListener("click", () => {
       document.getElementById("checkoutForm").style.display = "none";
       document.getElementById("overlay").style.display = "none";
     });
 
-    // Overlay click
     document.getElementById("overlay")?.addEventListener("click", () => {
       document.getElementById("checkoutForm").style.display = "none";
       document.getElementById("overlay").style.display = "none";
@@ -165,8 +173,7 @@ window.addToCart = function(product) {
 
   saveCart(cart);
   updateCartCount();
-  
-  // Show notification
+
   const notification = document.createElement("div");
   notification.className = "cart-notification";
   notification.innerHTML = `
@@ -174,6 +181,6 @@ window.addToCart = function(product) {
     Added to cart!
   `;
   document.body.appendChild(notification);
-  
+
   setTimeout(() => notification.remove(), 2000);
 };
