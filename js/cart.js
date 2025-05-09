@@ -153,6 +153,25 @@ function initializeCart() {
       document.getElementById("overlay").style.display = "none";
     });
   }
+  const checkoutForm = document.getElementById("checkoutForm");
+checkoutForm?.addEventListener("submit", function (e) {
+  e.preventDefault(); // Prevent actual form submission (optional)
+  
+  // You can send the form via AJAX here if needed
+
+  // Clear the cart after checkout
+  localStorage.removeItem("asimAgroCart");
+  updateCartDisplay();
+  updateCartCount();
+
+  // Hide the checkout popup
+  document.getElementById("checkoutForm").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+
+  // Show confirmation (optional)
+  alert("Thank you! Your order has been submitted.");
+});
+
 }
 
 // ---------- INITIALIZATION ----------
